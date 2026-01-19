@@ -3,6 +3,6 @@ import Combine
 import DI
 
 public protocol HTTPClient {
-    func fetch(request: URLRequest) -> AnyPublisher<Data, Error>
-    func fetch<T: Decodable>(urlRequest: URLRequest, type: T.Type) -> AnyPublisher<T, Error>
+    func fetch(url: URL) -> AnyPublisher<Data, Error>
+    func fetch<T: Decodable>(url: URL, type: T.Type) -> AnyPublisher<T, Error>
 }
