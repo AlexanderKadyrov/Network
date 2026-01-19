@@ -8,7 +8,7 @@ fileprivate extension DIStorage {
 }
 
 public extension DIStorage {
-    var networkService: HTTPClient {
+    var httpClient: HTTPClient {
         get { Self[HTTPClientKey.self] }
         set { Self[HTTPClientKey.self] = newValue }
     }
