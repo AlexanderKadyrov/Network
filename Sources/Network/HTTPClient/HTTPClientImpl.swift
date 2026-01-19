@@ -1,9 +1,18 @@
 import Foundation
+import Combine
 
 struct HTTPClientImpl: HTTPClient {
-    func fetchRequest(url: URL) async throws -> Data {
-        let request = URLRequest(url: url)
-        let (data, _) = try await URLSession.shared.data(for: request)
-        return data
+    
+    func fetch(url: URL) -> AnyPublisher<Data, Error> {
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetch<T: Decodable>(url: URL, type: T.Type) -> AnyPublisher<T, Error> {
+        return fetch(url: url)
+            .decode(type: type, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
 }
