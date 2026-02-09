@@ -15,7 +15,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "git@github.com:AlexanderKadyrov/DI.git", exact: "1.0.1")
+        .package(url: "https://github.com/AlexanderKadyrov/DI.git", exact: "1.0.1")
     ],
     targets: [
         .target(
